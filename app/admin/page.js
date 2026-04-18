@@ -2,8 +2,6 @@ import Link from 'next/link'
 import { getEvents, getNews, getSubscriberCount } from '../../lib/db'
 import artists from '../../data/artists.json'
 
-export const runtime = 'edge'
-
 export default async function AdminDashboard() {
   const [events, news, subCount] = await Promise.all([
     getEvents(),

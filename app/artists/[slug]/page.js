@@ -3,8 +3,6 @@ import { getEvents } from '../../../lib/db'
 import { notFound } from 'next/navigation'
 import ArtistPageClient from './ArtistPageClient'
 
-export const runtime = 'edge'
-
 export async function generateMetadata({ params }) {
   const { slug } = await params
   const artist = artists.find((a) => a.slug === slug)
