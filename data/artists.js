@@ -1,0 +1,67 @@
+export const artists = [
+  {
+    slug: 'baby-bash',
+    name: 'Baby Bash',
+    genre: 'Chicano Rap / Hip-Hop',
+    bio: 'Baby Bash is a platinum-selling recording artist whose hits like "Suga Suga" and "Cyclone" made him a household name. A cornerstone of West Coast Latin rap with crossover appeal.',
+    image: '/Baby Bash Photos/IMG_8161.jpeg',
+    coverImage: '/Baby Bash Photos/IMG-3049.JPG',
+    social: {
+      instagram: 'https://www.instagram.com/babybashsugasuga/',
+      twitter: 'https://x.com/babybash',
+      spotify: 'https://open.spotify.com/search/Baby%20Bash',
+    },
+  },
+  {
+    slug: 'slim-thug',
+    name: 'Slim Thug',
+    genre: 'Hip-Hop / Southern Rap',
+    bio: 'Slim Thug is a Houston rap legend and founder of Boss Hogg Outlawz. Known for his commanding delivery and anthemic street records.',
+    image: '/Slim Thug Photos/IMG_3219.JPG',
+    coverImage: '/Slim Thug Photos/IMG_1006.JPG',
+    social: {
+      instagram: 'https://www.instagram.com/slimthugga/',
+      twitter: 'https://x.com/slimthugga',
+      spotify: 'https://open.spotify.com/search/Slim%20Thug',
+    },
+  },
+  {
+    slug: 'lil-keke',
+    name: 'Lil Keke',
+    genre: 'Hip-Hop / Southern Rap',
+    bio: 'Lil Keke is a Houston rap legend whose influence on the Southern rap sound spans decades. With a catalog built on raw lyricism and undeniable street credibility, he remains one of the most respected voices to ever come out of H-Town.',
+    image: '/LIL Keke Photos/keke-legend-1500px.jpg',
+    coverImage: '/LIL Keke Photos/Photos/MADE7958.jpg',
+    social: {
+      instagram: 'https://www.instagram.com/lil_keke/',
+      twitter: 'https://x.com/lilkeke713',
+      spotify: 'https://open.spotify.com/search/Lil%20Keke',
+    },
+  },
+  {
+    slug: 'scarface',
+    name: 'Scarface',
+    genre: 'Hip-Hop / Southern Rap',
+    bio: 'Scarface is one of the most important and influential figures in the history of hip-hop. A cornerstone of the Geto Boys and a solo legend, his unflinching storytelling and cinematic production set a standard that still stands today.',
+    image: '/ScarFace Photos/Face4.jpeg',
+    coverImage: '/ScarFace Photos/Face3.jpg',
+    social: {
+      instagram: 'https://www.instagram.com/scarface/',
+      twitter: 'https://x.com/scarface',
+      spotify: 'https://open.spotify.com/search/Scarface%20rapper',
+    },
+  },
+  {
+    slug: 'zro',
+    name: 'Z-Ro',
+    genre: 'Hip-Hop / Southern Rap',
+    bio: 'Z-Ro — the Mo City Don — is a Houston rap institution. Known for his emotionally raw lyrics, melodic hooks, and prolific output, Z-Ro has built one of the most loyal fanbases in the South over a career spanning more than two decades.',
+    image: '/Zro Photos/31272E71-6963-496F-A185-0C67A5A1F188.JPEG',
+    coverImage: '/Zro Photos/31272E71-6963-496F-A185-0C67A5A1F188.JPEG',
+    social: {
+      instagram: 'https://www.instagram.com/zromodondon/',
+      twitter: 'https://x.com/zromodondon',
+      spotify: 'https://open.spotify.com/search/Z-Ro',
+    },
+  },
+]
