@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { signAdminToken, getAdminCookieOptions, COOKIE_NAME } from '../../../../lib/auth'
 
-export const runtime = 'edge'
 
 export async function POST(request) {
   const { password } = await request.json()

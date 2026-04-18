@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import { getEvents, createEvent, getAllActiveSubscribers, slugify } from '../../../../lib/db'
 import { sendEventBlast } from '../../../../lib/email'
 
-export const runtime = 'edge'
 
 export async function GET() {
   const events = await getEvents()

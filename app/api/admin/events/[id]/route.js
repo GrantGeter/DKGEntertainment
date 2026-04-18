@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { updateEvent, deleteEvent } from '../../../../../lib/db'
 
-export const runtime = 'edge'
 
 export async function PUT(request, { params }) {
   const { id: rawId } = await params

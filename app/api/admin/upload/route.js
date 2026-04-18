@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { uploadFile } from '../../../../lib/db'
 
-export const runtime = 'edge'
 
 const ALLOWED_TYPES = {
   '.jpg': 'image/jpeg',

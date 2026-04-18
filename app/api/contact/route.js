@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { sendContactNotification, sendContactAutoReply } from '../../../lib/email'
 
-export const runtime = 'edge'
 
 export async function POST(request) {
   const body = await request.json()

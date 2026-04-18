@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import { getSubscriberByToken, unsubscribeByToken } from '../../../lib/db'
 import { sendUnsubscribeConfirmation } from '../../../lib/email'
 
-export const runtime = 'edge'
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url)

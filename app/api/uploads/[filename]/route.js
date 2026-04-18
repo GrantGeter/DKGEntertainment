@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getFile } from '../../../../lib/db'
 
-export const runtime = 'edge'
 
 const MIME = {
   jpg: 'image/jpeg',

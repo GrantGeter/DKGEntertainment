@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import { addSubscriber } from '../../../lib/db'
 import { sendSubscribeConfirmation } from '../../../lib/email'
 
-export const runtime = 'edge'
 
 export async function POST(request) {
   const { email, name } = await request.json()
