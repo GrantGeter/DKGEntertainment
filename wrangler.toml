@@ -6,7 +6,7 @@ pages_build_output_dir = ".open-next/assets"
 [[d1_databases]]
 binding = "DB"
 database_name = "dkg-db"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "7cfa29a6-f697-4ec1-b5e9-0c553580d854"
 
 [[r2_buckets]]
 binding = "R2"
