@@ -33,9 +33,10 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Current password is incorrect.' }, { status: 401 })
   }
 
-  // Hash and persist the new password
+  // Hash and persist the new password, and clear the must-change flag
   const newHash = await hashPassword(newPassword)
   await setAdminConfig('admin_password_hash', newHash)
+  await setAdminConfig('admin_must_change_password', 'false')
 
   // Re-issue JWT with mustChange = false
   const token = await signAdminToken(false)

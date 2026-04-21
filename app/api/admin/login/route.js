@@ -31,6 +31,13 @@ export async function POST(request) {
 
   if (storedHash) {
     isValid = await verifyPassword(password, storedHash)
+    if (isValid) {
+      // If an admin reset flagged the password as requiring a change, honour it
+      try {
+        const flag = await getAdminConfig('admin_must_change_password')
+        if (flag === 'true') mustChange = true
+      } catch { /* D1 unavailable — ignore */ }
+    }
   } else {
     // Fall back to env var — always prompt to set a secure D1 password after
     const expected = process.env.ADMIN_PASSWORD || 'dkgadmin'
