@@ -30,7 +30,24 @@ export async function middleware(request) {
   }
 
   try {
-    await jwtVerify(token, getSecret())
+    const { payload } = await jwtVerify(token, getSecret())
+
+    // If mustChange flag is set, force redirect to change-password
+    // (except for the change-password route itself)
+    const isChangePassword =
+      pathname.startsWith('/admin/change-password') ||
+      pathname.startsWith('/api/admin/change-password')
+
+    if (payload.mustChange && !isChangePassword) {
+      if (isAdminApi) {
+        return NextResponse.json(
+          { error: 'Password change required. Visit /admin/change-password.' },
+          { status: 403 }
+        )
+      }
+      return NextResponse.redirect(new URL('/admin/change-password', request.url))
+    }
+
     return response
   } catch {
     if (isAdminApi) {
