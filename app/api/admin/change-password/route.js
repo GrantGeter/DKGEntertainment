@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { signAdminToken, getAdminCookieOptions, COOKIE_NAME } from '../../../../../lib/auth'
-import { getAdminConfig, setAdminConfig } from '../../../../../lib/db'
-import { hashPassword, verifyPassword, timingSafeEqual } from '../../../../../lib/adminAuth'
+import { signAdminToken, getAdminCookieOptions, COOKIE_NAME } from '../../../../lib/auth'
+import { getAdminConfig, setAdminConfig } from '../../../../lib/db'
+import { hashPassword, verifyPassword, timingSafeEqual } from '../../../../lib/adminAuth'
 
 export async function POST(request) {
   const { currentPassword, newPassword } = await request.json()
