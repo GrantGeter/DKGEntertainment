@@ -178,7 +178,7 @@ export default function LatinLegacyTourPage() {
             transition={{ delay: 0.45, duration: 0.6 }}
             className="text-white/50 text-sm md:text-base tracking-[0.2em] uppercase mb-12"
           >
-            Baby Bash &nbsp;&middot;&nbsp; Lil Rob &nbsp;&middot;&nbsp; MC Magic &nbsp;&middot;&nbsp; IAmLopez
+            Baby Bash &nbsp;&middot;&nbsp; Lil Rob &nbsp;&middot;&nbsp; MC Magic
           </motion.p>
 
           <motion.div
