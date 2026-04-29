@@ -36,6 +36,13 @@ CREATE TABLE IF NOT EXISTS news (
   author TEXT NOT NULL DEFAULT 'DKG Entertainment'
 );
 
+CREATE TABLE IF NOT EXISTS latin_legacy_subscribers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT UNIQUE NOT NULL,
+  name TEXT DEFAULT '',
+  subscribed_at TEXT DEFAULT (datetime('now'))
+);
+
 -- Seed events
 INSERT OR IGNORE INTO events (id, title, artists, date, venue, location, description, type, status, image, highlight, ticketUrl) VALUES
 (1, 'Baby Bash — Live', '["Baby Bash"]', 'Dates TBA', 'Multiple Venues', 'Southwest USA & Beyond', 'Baby Bash hits the road with tour dates coming to cities across the Southwest and beyond. More details dropping soon.', 'Tour', 'upcoming', '/Baby Bash Photos/IMG_8161.jpeg', NULL, ''),

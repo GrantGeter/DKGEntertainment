@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
@@ -74,6 +74,35 @@ const headliners = [
 
 export default function LatinLegacyTourPage() {
   const [activeSlide, setActiveSlide] = useState(0)
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [formState, setFormState] = useState('idle') // idle | loading | success | error
+  const [formMsg, setFormMsg] = useState('')
+
+  async function handleSubscribe(e) {
+    e.preventDefault()
+    setFormState('loading')
+    try {
+      const res = await fetch('/api/latin-legacy/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name }),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        setFormState('success')
+        setFormMsg(data.message || "You're on the list!")
+        setEmail('')
+        setName('')
+      } else {
+        setFormState('error')
+        setFormMsg(data.error || 'Something went wrong.')
+      }
+    } catch {
+      setFormState('error')
+      setFormMsg('Something went wrong. Please try again.')
+    }
+  }
 
   // Cycle hero background every 5 seconds
   useEffect(() => {
@@ -358,6 +387,81 @@ export default function LatinLegacyTourPage() {
                 </a>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── EMAIL CAPTURE ── */}
+      <section className="py-24 border-t border-white/5 bg-[#050505]">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            {/* Flag stripe */}
+            <div className="flex justify-center gap-1 mb-10">
+              <div className="w-10 h-1 bg-[#22c55e]" />
+              <div className="w-10 h-1 bg-white" />
+              <div className="w-10 h-1 bg-[#ef4444]" />
+            </div>
+
+            <p className="text-[#22c55e] text-[10px] font-black tracking-[0.5em] uppercase mb-4">
+              Stay in the Loop
+            </p>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none mb-3">
+              <span className="text-white">Join the</span>
+            </h2>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none mb-6">
+              <span className="text-[#22c55e]">Latin </span>
+              <span className="text-white">Legacy </span>
+              <span className="text-[#ef4444]">List</span>
+            </h2>
+            <p className="text-white/40 text-base mb-12 max-w-md mx-auto leading-relaxed">
+              Be the first to know about new tour dates, presales, and exclusive updates from the Latin Legacy Tour.
+            </p>
+
+            {formState === 'success' ? (
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex gap-1">
+                  <div className="w-6 h-1 bg-[#22c55e]" />
+                  <div className="w-6 h-1 bg-white" />
+                  <div className="w-6 h-1 bg-[#ef4444]" />
+                </div>
+                <p className="text-[#22c55e] text-lg font-black tracking-tight">{formMsg}</p>
+                <p className="text-white/30 text-sm">See you at the show.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+                <input
+                  type="text"
+                  placeholder="Your name (optional)"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  className="flex-1 px-5 py-4 bg-white/5 border border-white/15 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#22c55e] transition-colors"
+                />
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                  className="flex-1 px-5 py-4 bg-white/5 border border-white/15 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#22c55e] transition-colors"
+                />
+                <button
+                  type="submit"
+                  disabled={formState === 'loading'}
+                  className="px-8 py-4 bg-[#ef4444] text-white text-xs font-black tracking-widest uppercase hover:bg-[#22c55e] hover:text-black transition-colors duration-200 disabled:opacity-50 shrink-0"
+                >
+                  {formState === 'loading' ? 'Joining...' : 'Join'}
+                </button>
+              </form>
+            )}
+
+            {formState === 'error' && (
+              <p className="mt-4 text-[#ef4444] text-sm">{formMsg}</p>
+            )}
           </motion.div>
         </div>
       </section>
