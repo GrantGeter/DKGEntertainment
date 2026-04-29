@@ -131,16 +131,16 @@ export default function LatinLegacyTourPage() {
           >
             <span className="text-[#22c55e]">Latin</span>
             <br />
-            <span className="text-white">Legacy</span>
+            <span className="text-[#ef4444]">Legacy</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-white/80 text-3xl md:text-5xl font-black tracking-[0.2em] uppercase mb-8"
+            className="text-white text-3xl md:text-5xl font-black tracking-[0.2em] uppercase mb-8"
           >
-            Tour 2026
+            Tour <span className="text-[#ef4444]">2026</span>
           </motion.p>
 
           <motion.p
@@ -204,11 +204,20 @@ export default function LatinLegacyTourPage() {
       </section>
 
       {/* ── MARQUEE DATES BAR ── */}
-      <div className="bg-[#22c55e] py-3 overflow-hidden">
+      <div className="bg-black border-y border-white/10 py-3 overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(4)].map((_, i) => (
-            <span key={i} className="text-black text-[11px] font-black tracking-[0.3em] uppercase mx-6">
-              MAY 02 — PARKER, AZ &nbsp;◆&nbsp; JUN 05 — TUCSON, AZ &nbsp;◆&nbsp; JUL 10 — DALLAS, TX &nbsp;◆&nbsp; JUL 11 — HOUSTON, TX &nbsp;◆&nbsp; AUG 22 — RIVERSIDE, CA &nbsp;◆&nbsp;
+            <span key={i} className="text-[11px] font-black tracking-[0.3em] uppercase mx-6 flex items-center gap-4">
+              <span className="text-[#22c55e]">MAY 02 — PARKER, AZ</span>
+              <span className="text-[#ef4444]">◆</span>
+              <span className="text-[#ef4444]">JUN 05 — TUCSON, AZ</span>
+              <span className="text-[#22c55e]">◆</span>
+              <span className="text-[#22c55e]">JUL 10 — DALLAS, TX</span>
+              <span className="text-[#ef4444]">◆</span>
+              <span className="text-[#ef4444]">JUL 11 — HOUSTON, TX</span>
+              <span className="text-[#22c55e]">◆</span>
+              <span className="text-[#22c55e]">AUG 22 — RIVERSIDE, CA</span>
+              <span className="text-[#ef4444]">◆</span>
             </span>
           ))}
         </div>
@@ -323,12 +332,12 @@ export default function LatinLegacyTourPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-[#22c55e] text-[10px] font-black tracking-[0.4em] uppercase mb-12">Opening Act</p>
+            <p className="text-[#ef4444] text-[10px] font-black tracking-[0.4em] uppercase mb-12">Opening Act</p>
 
             <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-start md:items-center">
               <div className="md:w-2/5 shrink-0">
-                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-none mb-3">
-                  IAmLopez
+                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-none mb-3">
+                  <span className="text-white">IAm</span><span className="text-[#ef4444]">Lopez</span>
                 </h2>
                 <p className="text-white/30 text-sm tracking-widest uppercase">Latin Hip-Hop</p>
               </div>
@@ -363,7 +372,7 @@ export default function LatinLegacyTourPage() {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <p className="text-[#22c55e] text-[10px] font-black tracking-[0.4em] uppercase mb-4">2025 Tour Dates</p>
+            <p className="text-[#ef4444] text-[10px] font-black tracking-[0.4em] uppercase mb-4">2026 Tour Dates</p>
             <h2 className="text-6xl md:text-9xl font-black tracking-tighter text-white uppercase leading-none">
               Get Tickets
             </h2>
@@ -381,7 +390,7 @@ export default function LatinLegacyTourPage() {
               >
                 <div className="flex items-start sm:items-center gap-6 md:gap-10">
                   <div className="shrink-0 text-center w-16">
-                    <span className="block text-[#22c55e] text-xl md:text-2xl font-black tracking-tight leading-none">
+                    <span className={`block text-xl md:text-2xl font-black tracking-tight leading-none ${i % 2 === 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>
                       {show.date.split(' ')[1]}
                     </span>
                     <span className="block text-white/30 text-[10px] font-bold tracking-widest uppercase mt-0.5">
@@ -403,7 +412,7 @@ export default function LatinLegacyTourPage() {
                   href={show.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-8 py-3 bg-[#22c55e] text-black text-xs font-black tracking-widest uppercase hover:bg-white transition-colors duration-200 shrink-0 text-center"
+                  className={`inline-block px-8 py-3 text-white text-xs font-black tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-200 shrink-0 text-center ${i % 2 === 0 ? 'bg-[#22c55e] text-black' : 'bg-[#ef4444]'}`}
                 >
                   Buy Tickets →
                 </a>
@@ -436,7 +445,7 @@ export default function LatinLegacyTourPage() {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mb-3">
               An Unforgettable
             </h2>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-[#22c55e] uppercase leading-none mb-8">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-[#ef4444] uppercase leading-none mb-8">
               Night of Culture
             </h2>
             <p className="text-white/40 text-sm tracking-widest uppercase mb-10">
