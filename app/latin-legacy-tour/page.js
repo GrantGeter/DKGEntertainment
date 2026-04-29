@@ -1,6 +1,13 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+
+const heroImages = [
+  { src: '/LatinLegacyPhotos/LatinLegacyTour.png',      alt: 'Latin Legacy Tour — Baby Bash, Lil Rob, MC Magic' },
+  { src: '/LatinLegacyPhotos/LatinLegacyMay02.png',     alt: 'Latin Legacy Tour — Parker AZ' },
+  { src: '/LatinLegacyPhotos/LatinLegacyLiveMay02.png', alt: 'Latin Legacy Live' },
+]
 
 const shows = [
   {
@@ -40,7 +47,7 @@ const headliners = [
     name: 'Baby Bash',
     genre: 'Chicano Rap / West Coast Hip-Hop',
     bio: 'Baby Bash is a platinum-certified recording artist whose anthems became defining moments in Chicano rap and mainstream hip-hop culture. Born Ron Ray Bryant in Vallejo, California, Bash built a legacy that bridges the West Coast Latin rap scene with crossover pop appeal. His chart-topping hits cemented his status as one of the most beloved voices in the culture — and two decades later, he still commands every room he enters.',
-    image: '/Baby Bash Photos/IMG_8161.jpeg',
+    image: '/Baby Bash Photos/IMG-4097.jpg',
     hits: ['Suga Suga', 'Cyclone', 'Shorty Doowop', 'What Is It'],
     instagram: 'https://www.instagram.com/babybashsugasuga/',
     spotify: 'https://open.spotify.com/search/Baby%20Bash',
@@ -49,7 +56,7 @@ const headliners = [
     name: 'Lil Rob',
     genre: 'Chicano Rap / West Coast Hip-Hop',
     bio: 'Lil Rob is a San Diego-born Chicano rap icon whose career spans over two decades of authentic street music and heartfelt storytelling. Blending smooth West Coast flows with raw, unfiltered lyricism, he built one of the most devoted fanbases in Latin hip-hop. His music speaks directly to the Chicano experience — honest, powerful, and deeply rooted in the culture. His live performances are legendary for their intensity and undeniable connection with the crowd.',
-    image: null,
+    image: '/LatinLegacyPhotos/LilRob.png',
     hits: ['Summer Nights', 'Certified', 'Brought Up in the Hood', 'Hit the Switches'],
     instagram: 'https://www.instagram.com/lilrobsandiego/',
     spotify: 'https://open.spotify.com/search/Lil%20Rob',
@@ -58,7 +65,7 @@ const headliners = [
     name: 'MC Magic',
     genre: 'Chicano Rap / R&B',
     bio: 'MC Magic — born Robert Diaz — is a Phoenix-bred Chicano rap and R&B artist with a signature smooth, melodic style that has earned him a fiercely loyal following across the Southwest and beyond. Seamlessly blending rap with soulful R&B influences, MC Magic creates music that resonates as much in the lowrider as it does in the arena. His stage presence is magnetic — soulful, energetic, and impossible to ignore.',
-    image: null,
+    image: '/LatinLegacyPhotos/MC Magic.png',
     hits: ['No Mercy', 'Waiting', 'Te Quiero (I Love You)', 'Nothing Wrong'],
     instagram: 'https://www.instagram.com/mcmagicofficial/',
     spotify: 'https://open.spotify.com/search/MC%20Magic',
@@ -66,58 +73,83 @@ const headliners = [
 ]
 
 export default function LatinLegacyTourPage() {
+  const [activeSlide, setActiveSlide] = useState(0)
+
+  // Cycle hero background every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide(prev => (prev + 1) % heroImages.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <div className="min-h-screen bg-black overflow-x-hidden">
 
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Stage photo background */}
+
+        {/* Crossfading background images */}
         <div className="absolute inset-0">
-          <Image
-            src="/LatinLegacyPhotos/LatinLegacyMay02.png"
-            alt="Latin Legacy Tour live"
-            fill
-            className="object-cover object-center scale-105"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+          {heroImages.map((img, i) => (
+            <div
+              key={img.src}
+              className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+              style={{ opacity: i === activeSlide ? 1 : 0 }}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                className="object-cover object-center"
+                priority={i === 0}
+                sizes="100vw"
+              />
+            </div>
+          ))}
+          {/* Overlays */}
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-28 pb-16">
-          {/* Tour poster — the main visual anchor */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.88, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8"
+        {/* Hero content */}
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-28 pb-20">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-[#22c55e] text-[10px] md:text-xs font-black tracking-[0.5em] uppercase mb-6"
           >
-            <Image
-              src="/LatinLegacyPhotos/LatinLegacyTour.png"
-              alt="Latin Legacy Tour"
-              width={520}
-              height={520}
-              className="mx-auto w-72 md:w-96 lg:w-[420px] drop-shadow-2xl"
-              priority
-            />
-          </motion.div>
+            DKG Entertainment Presents
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-7xl md:text-[9rem] lg:text-[12rem] font-black tracking-tighter uppercase leading-none mb-2"
+          >
+            <span className="text-[#22c55e]">Latin</span>
+            <br />
+            <span className="text-white">Legacy</span>
+          </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
-            className="text-white/60 text-xs md:text-sm tracking-[0.3em] uppercase mb-2"
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-white/80 text-3xl md:text-5xl font-black tracking-[0.2em] uppercase mb-8"
           >
-            Featuring
+            Tour &rsquo;25
           </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.6 }}
-            className="text-white text-base md:text-lg font-black tracking-[0.15em] uppercase mb-10"
+            className="text-white/50 text-sm md:text-base tracking-[0.2em] uppercase mb-12"
           >
-            Baby Bash &nbsp;·&nbsp; Lil Rob &nbsp;·&nbsp; MC Magic &nbsp;·&nbsp; IAmLopez
+            Baby Bash &nbsp;&middot;&nbsp; Lil Rob &nbsp;&middot;&nbsp; MC Magic &nbsp;&middot;&nbsp; IAmLopez
           </motion.p>
 
           <motion.div
@@ -134,10 +166,29 @@ export default function LatinLegacyTourPage() {
             </a>
             <a
               href="#lineup"
-              className="px-10 py-4 border border-white/25 text-white text-xs font-bold tracking-widest uppercase hover:border-[#22c55e] hover:text-[#22c55e] transition-all duration-200"
+              className="px-10 py-4 border border-white/30 text-white text-xs font-bold tracking-widest uppercase hover:border-[#22c55e] hover:text-[#22c55e] transition-all duration-200"
             >
               View Lineup
             </a>
+          </motion.div>
+
+          {/* Slide indicator dots */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="flex gap-2 justify-center mt-14"
+          >
+            {heroImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveSlide(i)}
+                className={`h-0.5 transition-all duration-500 ${
+                  i === activeSlide ? 'w-8 bg-[#22c55e]' : 'w-3 bg-white/25 hover:bg-white/50'
+                }`}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
           </motion.div>
         </div>
 
@@ -165,7 +216,6 @@ export default function LatinLegacyTourPage() {
 
       {/* ── HEADLINERS ── */}
       <section id="lineup" className="scroll-mt-20">
-        {/* Section header */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-24 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -180,7 +230,6 @@ export default function LatinLegacyTourPage() {
           </motion.div>
         </div>
 
-        {/* Artist rows */}
         <div className="border-t border-white/5">
           {headliners.map((artist, i) => {
             const isEven = i % 2 === 0
@@ -195,31 +244,16 @@ export default function LatinLegacyTourPage() {
               >
                 <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
 
-                  {/* Photo / graphic panel */}
+                  {/* Photo panel */}
                   <div className="relative w-full md:w-1/2 aspect-square md:aspect-auto md:min-h-[520px] bg-[#0d0d0d] overflow-hidden">
-                    {artist.image ? (
-                      <Image
-                        src={artist.image}
-                        alt={artist.name}
-                        fill
-                        className="object-cover object-top"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    ) : (
-                      /* Stylised graphic placeholder */
-                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-12">
-                        <div className="w-24 h-0.5 bg-[#22c55e]/40 mb-4" />
-                        <span className="text-[5rem] md:text-[7rem] font-black text-white/[0.04] tracking-tighter uppercase leading-none text-center break-all">
-                          {artist.name}
-                        </span>
-                        <div className="absolute bottom-10 left-10 right-10">
-                          <div className="h-px bg-gradient-to-r from-transparent via-[#22c55e]/20 to-transparent" />
-                          <p className="mt-4 text-[#22c55e]/50 text-[9px] tracking-[0.4em] uppercase text-center">{artist.genre}</p>
-                        </div>
-                      </div>
-                    )}
-                    {/* Overlay gradient toward text panel */}
-                    <div className={`absolute inset-0 bg-gradient-to-${isEven ? 'r' : 'l'} from-transparent to-black/20`} />
+                    <Image
+                      src={artist.image}
+                      alt={artist.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-${isEven ? 'r' : 'l'} from-transparent to-black/25`} />
                   </div>
 
                   {/* Text panel */}
@@ -234,7 +268,6 @@ export default function LatinLegacyTourPage() {
                       {artist.bio}
                     </p>
 
-                    {/* Known for tags */}
                     <div className="mb-10">
                       <p className="text-white/25 text-[9px] font-black tracking-[0.4em] uppercase mb-3">Known For</p>
                       <div className="flex flex-wrap gap-2">
@@ -290,11 +323,9 @@ export default function LatinLegacyTourPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            {/* Label */}
             <p className="text-[#22c55e] text-[10px] font-black tracking-[0.4em] uppercase mb-12">Opening Act</p>
 
             <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-start md:items-center">
-              {/* Name block */}
               <div className="md:w-2/5 shrink-0">
                 <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-none mb-3">
                   IAmLopez
@@ -302,10 +333,8 @@ export default function LatinLegacyTourPage() {
                 <p className="text-white/30 text-sm tracking-widest uppercase">Latin Hip-Hop</p>
               </div>
 
-              {/* Vertical rule */}
               <div className="hidden md:block w-px self-stretch bg-white/8 shrink-0" />
 
-              {/* Bio + social */}
               <div className="md:w-1/2">
                 <p className="text-white/55 text-base md:text-lg leading-relaxed mb-8">
                   IAmLopez brings raw energy and next-generation Latin hip-hop to the Latin Legacy Tour. Connecting the bridge between the culture&apos;s roots and its future, IAmLopez delivers a live set that lights the stage on fire before the legends step in. Don&apos;t sleep on the opening act.
@@ -348,10 +377,9 @@ export default function LatinLegacyTourPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="flex flex-col sm:flex-row sm:items-center justify-between py-7 border-b border-white/5 gap-4 group"
+                className="flex flex-col sm:flex-row sm:items-center justify-between py-7 border-b border-white/5 gap-4"
               >
                 <div className="flex items-start sm:items-center gap-6 md:gap-10">
-                  {/* Date */}
                   <div className="shrink-0 text-center w-16">
                     <span className="block text-[#22c55e] text-xl md:text-2xl font-black tracking-tight leading-none">
                       {show.date.split(' ')[1]}
@@ -361,10 +389,8 @@ export default function LatinLegacyTourPage() {
                     </span>
                   </div>
 
-                  {/* Divider */}
                   <div className="hidden sm:block w-px h-10 bg-white/10 shrink-0" />
 
-                  {/* Location */}
                   <div>
                     <p className="text-white text-lg md:text-xl font-black tracking-tight uppercase leading-tight">
                       {show.city}
@@ -387,7 +413,7 @@ export default function LatinLegacyTourPage() {
         </div>
       </section>
 
-      {/* ── PHOTO CTA BANNER ── */}
+      {/* ── CLOSING CTA BANNER ── */}
       <section className="relative h-[55vh] md:h-[65vh] overflow-hidden">
         <Image
           src="/LatinLegacyPhotos/LatinLegacyLiveMay02.png"
