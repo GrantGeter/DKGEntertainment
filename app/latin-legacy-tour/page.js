@@ -101,7 +101,7 @@ export default function LatinLegacyTourPage() {
                 src={img.src}
                 alt={img.alt}
                 fill
-                className="object-contain"
+                className="object-cover object-center"
                 priority={i === 0}
                 sizes="100vw"
               />
