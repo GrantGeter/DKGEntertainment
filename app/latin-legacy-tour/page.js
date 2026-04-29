@@ -131,16 +131,16 @@ export default function LatinLegacyTourPage() {
           >
             <span className="text-[#22c55e]">Latin</span>
             <br />
-            <span className="text-[#ef4444]">Legacy</span>
+            <span className="text-white">Legacy</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-white text-3xl md:text-5xl font-black tracking-[0.2em] uppercase mb-8"
+            className="text-[#ef4444] text-3xl md:text-5xl font-black tracking-[0.2em] uppercase mb-8"
           >
-            Tour <span className="text-[#ef4444]">2026</span>
+            Tour 2026
           </motion.p>
 
           <motion.p
