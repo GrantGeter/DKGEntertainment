@@ -73,6 +73,142 @@ const headliners = [
   },
 ]
 
+const videoClips = [
+  '/api/videos/clip_02_15m16s.mp4',
+  '/api/videos/clip_03_25m54s.mp4',
+  '/api/videos/clip_04_40m46s.mp4',
+  '/api/videos/clip_05_46m12s.mp4',
+  '/api/videos/clip_06_56m16s.mp4',
+  '/api/videos/clip_07_62m18s.mp4',
+  '/api/videos/clip_08_67m36s.mp4',
+]
+
+function ChevronLeft() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function ChevronRight() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function VideoCarousel({ clips }) {
+  const [current, setCurrent] = useState(0)
+  const touchStartX = useRef(null)
+  const videoRefs = useRef([])
+
+  function pauseCurrent() {
+    const vid = videoRefs.current[current]
+    if (vid) vid.pause()
+  }
+
+  function goTo(index) {
+    pauseCurrent()
+    setCurrent(index)
+  }
+
+  function prev() {
+    goTo((current - 1 + clips.length) % clips.length)
+  }
+
+  function next() {
+    goTo((current + 1) % clips.length)
+  }
+
+  function onTouchStart(e) {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  function onTouchEnd(e) {
+    if (touchStartX.current === null) return
+    const dx = touchStartX.current - e.changedTouches[0].clientX
+    if (Math.abs(dx) > 40) {
+      dx > 0 ? next() : prev()
+    }
+    touchStartX.current = null
+  }
+
+  return (
+    <div className="md:hidden -mx-6">
+      {/* Slide track */}
+      <div
+        className="overflow-hidden"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        <div
+          className="flex will-change-transform"
+          style={{
+            transform: `translateX(-${current * 100}%)`,
+            transition: 'transform 0.32s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+        >
+          {clips.map((src, i) => (
+            <div key={src} className="w-full flex-shrink-0 px-6">
+              <video
+                ref={el => { videoRefs.current[i] = el }}
+                src={src}
+                controls
+                playsInline
+                className="w-full aspect-video bg-black"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Controls row */}
+      <div className="flex items-center justify-between mt-5 px-6">
+        {/* Prev button */}
+        <button
+          onClick={prev}
+          aria-label="Previous clip"
+          className="w-10 h-10 flex items-center justify-center border border-white/15 text-white/40 hover:border-[#22c55e] hover:text-[#22c55e] active:scale-95 transition-all"
+        >
+          <ChevronLeft />
+        </button>
+
+        {/* Dot indicators */}
+        <div className="flex items-center gap-2">
+          {clips.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Go to clip ${i + 1}`}
+              className={`h-0.5 rounded-full transition-all duration-300 ${
+                i === current
+                  ? 'w-6 bg-[#22c55e]'
+                  : 'w-3 bg-white/25 hover:bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Next button */}
+        <button
+          onClick={next}
+          aria-label="Next clip"
+          className="w-10 h-10 flex items-center justify-center border border-white/15 text-white/40 hover:border-[#22c55e] hover:text-[#22c55e] active:scale-95 transition-all"
+        >
+          <ChevronRight />
+        </button>
+      </div>
+
+      {/* Counter */}
+      <p className="text-center text-white/25 text-[10px] font-black tracking-[0.3em] uppercase mt-3">
+        {current + 1} <span className="text-white/15">/ {clips.length}</span>
+      </p>
+    </div>
+  )
+}
+
 export default function LatinLegacyTourPage() {
   const [activeSlide, setActiveSlide] = useState(0)
   const [email, setEmail] = useState('')
@@ -388,47 +524,44 @@ export default function LatinLegacyTourPage() {
             </h2>
           </motion.div>
 
-          {/* Featured clip */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mb-4"
-          >
-            <video
-              src="/api/videos/clip_02_15m16s.mp4"
-              controls
-              playsInline
-              className="w-full aspect-video bg-black object-contain"
-            />
-          </motion.div>
+          {/* ── Mobile: swipeable carousel ── */}
+          <VideoCarousel clips={videoClips} />
 
-          {/* Clip grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              '/api/videos/clip_03_25m54s.mp4',
-              '/api/videos/clip_04_40m46s.mp4',
-              '/api/videos/clip_05_46m12s.mp4',
-              '/api/videos/clip_06_56m16s.mp4',
-              '/api/videos/clip_07_62m18s.mp4',
-              '/api/videos/clip_08_67m36s.mp4',
-            ].map((src, i) => (
-              <motion.div
-                key={src}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.55, delay: i * 0.07 }}
-              >
-                <video
-                  src={src}
-                  controls
-                  playsInline
-                  className="w-full aspect-video bg-black object-contain"
-                />
-              </motion.div>
-            ))}
+          {/* ── Desktop: featured + grid ── */}
+          <div className="hidden md:block">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="mb-4"
+            >
+              <video
+                src={videoClips[0]}
+                controls
+                playsInline
+                className="w-full aspect-video bg-black object-contain"
+              />
+            </motion.div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {videoClips.slice(1).map((src, i) => (
+                <motion.div
+                  key={src}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.55, delay: i * 0.07 }}
+                >
+                  <video
+                    src={src}
+                    controls
+                    playsInline
+                    className="w-full aspect-video bg-black object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
