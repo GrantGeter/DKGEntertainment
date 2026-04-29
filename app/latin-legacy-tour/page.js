@@ -104,6 +104,16 @@ function VideoCarousel({ clips }) {
   const touchStartX = useRef(null)
   const videoRefs = useRef([])
 
+  // Autoplay the active video whenever the slide changes (including on first mount).
+  // We set .muted imperatively because React's `muted` JSX prop doesn't reliably
+  // reflect to the DOM property in all versions — this is the safe workaround.
+  useEffect(() => {
+    const vid = videoRefs.current[current]
+    if (!vid) return
+    vid.muted = true
+    vid.play().catch(() => {}) // silently ignore autoplay-policy rejections
+  }, [current])
+
   function pauseCurrent() {
     const vid = videoRefs.current[current]
     if (vid) vid.pause()
@@ -156,6 +166,7 @@ function VideoCarousel({ clips }) {
                 ref={el => { videoRefs.current[i] = el }}
                 src={src}
                 controls
+                muted
                 playsInline
                 className="w-full aspect-video bg-black"
               />
@@ -539,6 +550,8 @@ export default function LatinLegacyTourPage() {
               <video
                 src={videoClips[0]}
                 controls
+                autoPlay
+                muted
                 playsInline
                 className="w-full aspect-video bg-black object-contain"
               />
