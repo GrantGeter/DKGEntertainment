@@ -20,15 +20,25 @@ export default function ArtistCard({ artist, index = 0 }) {
             className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
+          {/* Dark base gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+          {/* Red tint overlay on hover */}
+          <div className="absolute inset-0 bg-[#FF0000]/0 group-hover:bg-[#FF0000]/10 transition-all duration-700" />
+          {/* Red bottom sweep bar */}
+          <div className="absolute bottom-0 left-0 h-0.5 bg-[#FF0000] w-0 group-hover:w-full transition-all duration-500 ease-out" />
+
           <div className="absolute bottom-0 left-0 right-0 p-5">
+            {/* Red left accent bar */}
+            <div className="w-0 group-hover:w-6 h-0.5 bg-[#FF0000] mb-2 transition-all duration-300" />
             <p className="text-[#c9a84c] text-[10px] font-bold tracking-widest uppercase mb-1">{artist.genre}</p>
             <h3 className="text-white text-xl font-black tracking-tight leading-tight">{artist.name}</h3>
-            <span className="inline-block mt-2 text-[10px] text-white/0 group-hover:text-white/50 transition-all duration-300 tracking-widest uppercase">
-              View Profile →
+            <span className="inline-flex items-center gap-1 mt-2 text-[10px] text-transparent group-hover:text-[#FF0000] transition-all duration-300 tracking-widest uppercase font-black">
+              View Profile <span className="translate-x-0 group-hover:translate-x-1 transition-transform duration-300">→</span>
             </span>
           </div>
         </div>
+        {/* Red border frame on hover */}
+        <div className="absolute inset-0 border border-transparent group-hover:border-[#FF0000]/40 transition-all duration-500 pointer-events-none" />
       </Link>
     </motion.div>
   )

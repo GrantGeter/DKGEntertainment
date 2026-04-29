@@ -17,6 +17,7 @@ export default function AdminForm({ type, initial = {}, onSubmit }) {
     status: initial.status || 'upcoming',
     image: initial.image || '',
     highlight: initial.highlight || '',
+    instagramUrl: initial.instagramUrl || '',
     ticketUrl: initial.ticketUrl || '',
     artists: Array.isArray(initial.artists) ? initial.artists.join(', ') : (initial.artists || ''),
     // news fields
@@ -112,7 +113,11 @@ export default function AdminForm({ type, initial = {}, onSubmit }) {
           </div>
           <div className={FIELD}>
             <label className={LABEL}>Ticket URL</label>
-            <input className={INPUT} type="url" value={form.ticketUrl} onChange={set('ticketUrl')} placeholder="https://..." />
+            <input className={INPUT} value={form.ticketUrl} onChange={set('ticketUrl')} placeholder="https://... or /latin-legacy-tour" />
+          </div>
+          <div className={FIELD}>
+            <label className={LABEL}>Instagram URL</label>
+            <input className={INPUT} type="url" value={form.instagramUrl} onChange={set('instagramUrl')} placeholder="https://www.instagram.com/handle" />
           </div>
           <div className={FIELD}>
             <label className={LABEL}>Highlight text</label>

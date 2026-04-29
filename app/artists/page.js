@@ -17,6 +17,11 @@ export default function ArtistsPage() {
         >
           <p className="text-[#c9a84c] text-[10px] font-black tracking-[0.35em] uppercase mb-4">DKG Roster</p>
           <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-white uppercase leading-none">Artists</h1>
+          <div className="mt-4 flex gap-1">
+            <div className="h-1 w-16 bg-[#FF0000]" />
+            <div className="h-1 w-6 bg-[#FF0000]/40" />
+            <div className="h-1 w-2 bg-[#FF0000]/20" />
+          </div>
           <p className="mt-6 text-white/40 text-lg max-w-2xl leading-relaxed">
             Legends, icons, and next-wave voices. The DKG Entertainment roster represents decades of authentic hip-hop culture.
           </p>
@@ -59,7 +64,7 @@ export default function ArtistsPage() {
                   <div className="flex flex-wrap gap-3">
                     <Link
                       href={`/artists/${artist.slug}`}
-                      className="px-7 py-3 bg-[#c9a84c] text-black text-xs font-black tracking-widest uppercase hover:bg-white transition-colors"
+                      className="px-7 py-3 bg-[#FF0000] text-white text-xs font-black tracking-widest uppercase hover:bg-white hover:text-black transition-colors"
                     >
                       View Artist
                     </Link>
@@ -68,7 +73,7 @@ export default function ArtistsPage() {
                         href={artist.social.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-7 py-3 border border-white/15 text-white/50 text-xs font-bold tracking-widest uppercase hover:border-[#c9a84c] hover:text-[#c9a84c] transition-all"
+                        className="px-7 py-3 border border-white/15 text-white/50 text-xs font-bold tracking-widest uppercase hover:border-[#FF0000] hover:text-[#FF0000] transition-all"
                       >
                         Instagram
                       </a>
