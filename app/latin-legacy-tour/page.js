@@ -49,7 +49,7 @@ const headliners = [
     bio: 'Baby Bash is a platinum-certified recording artist whose anthems became defining moments in Chicano rap and mainstream hip-hop culture. Born Ron Ray Bryant in Vallejo, California, Bash built a legacy that bridges the West Coast Latin rap scene with crossover pop appeal. His chart-topping hits cemented his status as one of the most beloved voices in the culture — and two decades later, he still commands every room he enters.',
     image: '/Baby Bash Photos/IMG-4097.jpg',
     hits: ['Suga Suga', 'Cyclone', 'Shorty Doowop', 'What Is It'],
-    instagram: 'https://www.instagram.com/babybashsugasuga/',
+    instagram: 'https://www.instagram.com/babybash/',
     spotify: 'https://open.spotify.com/search/Baby%20Bash',
   },
   {
@@ -58,7 +58,7 @@ const headliners = [
     bio: 'Lil Rob is a San Diego-born Chicano rap icon whose career spans over two decades of authentic street music and heartfelt storytelling. Blending smooth West Coast flows with raw, unfiltered lyricism, he built one of the most devoted fanbases in Latin hip-hop. His music speaks directly to the Chicano experience — honest, powerful, and deeply rooted in the culture. His live performances are legendary for their intensity and undeniable connection with the crowd.',
     image: '/LatinLegacyPhotos/LilRob.png',
     hits: ['Summer Nights', 'Certified', 'Brought Up in the Hood', 'Hit the Switches'],
-    instagram: 'https://www.instagram.com/lilrobsandiego/',
+    instagram: 'https://instagram.com/thereallilrob/',
     spotify: 'https://open.spotify.com/search/Lil%20Rob',
   },
   {
@@ -140,7 +140,7 @@ export default function LatinLegacyTourPage() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-white/80 text-3xl md:text-5xl font-black tracking-[0.2em] uppercase mb-8"
           >
-            Tour
+            Tour 2026
           </motion.p>
 
           <motion.p
@@ -340,7 +340,7 @@ export default function LatinLegacyTourPage() {
                   IAmLopez brings raw energy and next-generation Latin hip-hop to the Latin Legacy Tour. Connecting the bridge between the culture&apos;s roots and its future, IAmLopez delivers a live set that lights the stage on fire before the legends step in. Don&apos;t sleep on the opening act.
                 </p>
                 <a
-                  href="https://www.instagram.com/iamlopez/"
+                  href="https://www.instagram.com/iamlopez__/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-7 py-3 border border-white/15 text-white/50 text-xs font-bold tracking-widest uppercase hover:border-[#22c55e] hover:text-[#22c55e] transition-all"
