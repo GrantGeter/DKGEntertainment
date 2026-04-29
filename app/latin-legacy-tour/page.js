@@ -372,6 +372,67 @@ export default function LatinLegacyTourPage() {
         </div>
       </section>
 
+      {/* ── LIVE FOOTAGE ── */}
+      <section className="py-24 bg-[#050505] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <p className="text-[#22c55e] text-[10px] font-black tracking-[0.4em] uppercase mb-4">Watch the Show</p>
+            <h2 className="text-6xl md:text-9xl font-black tracking-tighter text-white uppercase leading-none">
+              Live<br /><span className="text-[#ef4444]">Footage</span>
+            </h2>
+          </motion.div>
+
+          {/* Featured clip */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="mb-4"
+          >
+            <video
+              src="/LatinLegacyPhotos/clips/clip_02_15m16s.mp4"
+              controls
+              playsInline
+              className="w-full aspect-video bg-black object-contain"
+            />
+          </motion.div>
+
+          {/* Clip grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              '/LatinLegacyPhotos/clips/clip_03_25m54s.mp4',
+              '/LatinLegacyPhotos/clips/clip_04_40m46s.mp4',
+              '/LatinLegacyPhotos/clips/clip_05_46m12s.mp4',
+              '/LatinLegacyPhotos/clips/clip_06_56m16s.mp4',
+              '/LatinLegacyPhotos/clips/clip_07_62m18s.mp4',
+              '/LatinLegacyPhotos/clips/clip_08_67m36s.mp4',
+            ].map((src, i) => (
+              <motion.div
+                key={src}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.55, delay: i * 0.07 }}
+              >
+                <video
+                  src={src}
+                  controls
+                  playsInline
+                  className="w-full aspect-video bg-black object-contain"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── OPENING ACT ── */}
       <section className="bg-[#080808] py-24 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
