@@ -411,6 +411,48 @@ export default function LatinLegacyTourPage() {
         </div>
       </section>
 
+      {/* ── SPECIAL GUEST ── */}
+      <section className="bg-[#080808] py-24 border-t border-[#ef4444]/20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="flex items-center gap-4 mb-12">
+              <p className="text-[#ef4444] text-[10px] font-black tracking-[0.4em] uppercase">★ Special Guest</p>
+              <span className="px-3 py-1 border border-[#ef4444]/40 text-[#ef4444] text-[9px] font-black tracking-[0.3em] uppercase">Tucson Only</span>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-start md:items-center">
+              <div className="md:w-2/5 shrink-0">
+                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-none mb-3">
+                  <span className="text-white">Con</span><span className="text-[#ef4444]">crete</span>
+                </h2>
+                <p className="text-white/30 text-sm tracking-widest uppercase">AVA Amphitheater · Jun 5</p>
+              </div>
+
+              <div className="hidden md:block w-px self-stretch bg-white/8 shrink-0" />
+
+              <div className="md:w-1/2">
+                <p className="text-white/55 text-base md:text-lg leading-relaxed mb-8">
+                  Concrete joins the Latin Legacy Tour for one special night only in Tucson at AVA Amphitheater. Catch this exclusive performance alongside Baby Bash, Lil Rob, and MC Magic on June 5th — the only show on the tour to feature this special guest.
+                </p>
+                <a
+                  href="https://www.instagram.com/concretelive"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-7 py-3 border border-white/15 text-white/50 text-xs font-bold tracking-widest uppercase hover:border-[#ef4444] hover:text-[#ef4444] transition-all"
+                >
+                  @concretelive
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── EMAIL CAPTURE ── */}
       <section className="py-24 border-t border-white/5 bg-[#050505]">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
@@ -510,57 +552,63 @@ export default function LatinLegacyTourPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="flex flex-col sm:flex-row sm:items-center justify-between py-7 border-b border-white/5 gap-4"
+                className={`border-b pb-0 gap-0 ${show.specialGuest ? 'border-[#ef4444]/30' : 'border-white/5'}`}
               >
-                <div className="flex items-start sm:items-center gap-6 md:gap-10">
-                  <div className="shrink-0 text-center w-16">
-                    <span className={`block text-xl md:text-2xl font-black tracking-tight leading-none ${i % 2 === 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>
-                      {show.date.split(' ')[1]}
-                    </span>
-                    <span className="block text-white/30 text-[10px] font-bold tracking-widest uppercase mt-0.5">
-                      {show.date.split(' ')[0]}
-                    </span>
+                {/* Main show row */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between py-7 gap-4">
+                  <div className="flex items-start sm:items-center gap-6 md:gap-10">
+                    <div className="shrink-0 text-center w-16">
+                      <span className={`block text-xl md:text-2xl font-black tracking-tight leading-none ${i % 2 === 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>
+                        {show.date.split(' ')[1]}
+                      </span>
+                      <span className="block text-white/30 text-[10px] font-bold tracking-widest uppercase mt-0.5">
+                        {show.date.split(' ')[0]}
+                      </span>
+                    </div>
+                    <div className="hidden sm:block w-px h-10 bg-white/10 shrink-0" />
+                    <div>
+                      <p className="text-white text-lg md:text-xl font-black tracking-tight uppercase leading-tight">
+                        {show.city}
+                      </p>
+                      <p className="text-white/35 text-sm mt-0.5">{show.venue}</p>
+                    </div>
                   </div>
-
-                  <div className="hidden sm:block w-px h-10 bg-white/10 shrink-0" />
-
-                  <div>
-                    <p className="text-white text-lg md:text-xl font-black tracking-tight uppercase leading-tight">
-                      {show.city}
-                    </p>
-                    <p className="text-white/35 text-sm mt-0.5">{show.venue}</p>
-                    {show.specialGuest && (
-                      <div className="flex items-center gap-3 mt-2 flex-wrap">
-                        <span className="text-[#ef4444] text-[9px] font-black tracking-[0.3em] uppercase">
-                          Special Guest
-                        </span>
-                        <span className="text-white/60 text-xs font-black tracking-wide uppercase">
-                          {show.specialGuest.name}
-                        </span>
-                        <a
-                          href={show.specialGuest.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-white/35 text-[10px] font-bold tracking-widest uppercase hover:text-white transition-colors"
-                        >
-                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 shrink-0" aria-hidden="true">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                          </svg>
-                          {show.specialGuest.handle}
-                        </a>
-                      </div>
-                    )}
-                  </div>
+                  <a
+                    href={show.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-block px-8 py-3 text-white text-xs font-black tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-200 shrink-0 text-center ${i % 2 === 0 ? 'bg-[#22c55e] text-black' : 'bg-[#ef4444]'}`}
+                  >
+                    Buy Tickets →
+                  </a>
                 </div>
 
-                <a
-                  href={show.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-block px-8 py-3 text-white text-xs font-black tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-200 shrink-0 text-center ${i % 2 === 0 ? 'bg-[#22c55e] text-black' : 'bg-[#ef4444]'}`}
-                >
-                  Buy Tickets →
-                </a>
+                {/* Special guest callout — full-width banner below the show row */}
+                {show.specialGuest && (
+                  <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-5 py-4 border border-[#ef4444]/40 bg-[#ef4444]/5">
+                    <div className="flex items-center gap-4 flex-wrap">
+                      <span className="text-[#ef4444] text-[9px] font-black tracking-[0.4em] uppercase shrink-0">
+                        ★ Special Guest
+                      </span>
+                      <span className="w-px h-4 bg-white/15 hidden sm:block" />
+                      <span className="text-white text-xl md:text-2xl font-black tracking-tight uppercase">
+                        {show.specialGuest.name}
+                      </span>
+                      <span className="text-white/30 text-xs tracking-widest uppercase">Tucson Only</span>
+                    </div>
+                    <a
+                      href={show.specialGuest.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 text-white/60 text-[10px] font-bold tracking-widest uppercase hover:border-[#ef4444] hover:text-[#ef4444] transition-all shrink-0"
+                    >
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                      </svg>
+                      {show.specialGuest.handle}
+                    </a>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
