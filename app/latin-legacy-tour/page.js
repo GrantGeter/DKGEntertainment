@@ -289,7 +289,7 @@ export default function LatinLegacyTourPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-                className="border-b border-white/5"
+                className="border-b border-white/5 group/row hover:border-[#ef4444]/30 transition-colors duration-500"
               >
                 <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
 
@@ -299,17 +299,25 @@ export default function LatinLegacyTourPage() {
                       src={artist.image}
                       alt={artist.name}
                       fill
-                      className="object-contain"
+                      className="object-contain transition-transform duration-700 group-hover/row:scale-[1.02]"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
+                    {/* Red tint on hover */}
+                    <div className="absolute inset-0 bg-[#ef4444]/0 group-hover/row:bg-[#ef4444]/8 transition-all duration-700" />
                     <div className={`absolute inset-0 bg-gradient-to-${isEven ? 'r' : 'l'} from-transparent to-black/25`} />
+                    {/* Red sweep bar along bottom */}
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-[#ef4444] w-0 group-hover/row:w-full transition-all duration-600 ease-out" />
                   </div>
 
                   {/* Text panel */}
                   <div className="w-full md:w-1/2 flex flex-col justify-center px-10 py-14 md:px-16 lg:px-20">
-                    <p className="text-[#22c55e] text-[10px] font-black tracking-[0.4em] uppercase mb-2">
-                      Headliner &nbsp;·&nbsp; {artist.genre}
-                    </p>
+                    {/* Red + green label bar */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-3 h-0.5 bg-[#ef4444]" />
+                      <p className="text-[#22c55e] text-[10px] font-black tracking-[0.4em] uppercase">
+                        Headliner &nbsp;·&nbsp; {artist.genre}
+                      </p>
+                    </div>
                     <h3 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none mb-6">
                       {artist.name}
                     </h3>
@@ -323,7 +331,7 @@ export default function LatinLegacyTourPage() {
                         {artist.hits.map(hit => (
                           <span
                             key={hit}
-                            className="px-3 py-1.5 border border-white/10 text-white/35 text-xs font-medium"
+                            className="px-3 py-1.5 border border-white/10 text-white/35 text-xs font-medium hover:border-[#ef4444]/40 hover:text-white/60 transition-all"
                           >
                             &ldquo;{hit}&rdquo;
                           </span>
@@ -334,7 +342,7 @@ export default function LatinLegacyTourPage() {
                     <div className="flex flex-wrap gap-3">
                       <a
                         href="#tickets"
-                        className="px-7 py-3 bg-[#22c55e] text-black text-xs font-black tracking-widest uppercase hover:bg-white transition-colors"
+                        className="px-7 py-3 bg-[#ef4444] text-white text-xs font-black tracking-widest uppercase hover:bg-white hover:text-black transition-colors"
                       >
                         Get Tickets
                       </a>
@@ -342,7 +350,7 @@ export default function LatinLegacyTourPage() {
                         href={artist.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-7 py-3 border border-white/15 text-white/50 text-xs font-bold tracking-widest uppercase hover:border-[#22c55e] hover:text-[#22c55e] transition-all"
+                        className="px-7 py-3 border border-white/15 text-white/50 text-xs font-bold tracking-widest uppercase hover:border-[#ef4444] hover:text-[#ef4444] transition-all"
                       >
                         Instagram
                       </a>

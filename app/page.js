@@ -103,12 +103,8 @@ export default function HomePage() {
           <div>
             <p className="text-[#c9a84c] text-[10px] font-black tracking-[0.3em] uppercase mb-3">The Roster</p>
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase">Artists</h2>
-            <div className="mt-3 flex gap-1">
-              <div className="h-0.5 w-12 bg-[#FF0000]" />
-              <div className="h-0.5 w-4 bg-[#FF0000]/40" />
-            </div>
           </div>
-          <Link href="/artists" className="hidden md:block text-xs font-bold tracking-widest uppercase text-white/30 hover:text-[#FF0000] transition-colors">
+          <Link href="/artists" className="hidden md:block text-xs font-bold tracking-widest uppercase text-white/30 hover:text-white transition-colors">
             View All →
           </Link>
         </motion.div>
