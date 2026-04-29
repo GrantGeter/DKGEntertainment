@@ -101,7 +101,7 @@ export default function LatinLegacyTourPage() {
                 src={img.src}
                 alt={img.alt}
                 fill
-                className="object-cover object-center"
+                className="object-contain"
                 priority={i === 0}
                 sizes="100vw"
               />
@@ -140,7 +140,7 @@ export default function LatinLegacyTourPage() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-white/80 text-3xl md:text-5xl font-black tracking-[0.2em] uppercase mb-8"
           >
-            Tour &rsquo;25
+            Tour
           </motion.p>
 
           <motion.p
@@ -250,7 +250,7 @@ export default function LatinLegacyTourPage() {
                       src={artist.image}
                       alt={artist.name}
                       fill
-                      className="object-cover object-top"
+                      className="object-contain"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-${isEven ? 'r' : 'l'} from-transparent to-black/25`} />
@@ -419,7 +419,7 @@ export default function LatinLegacyTourPage() {
           src="/LatinLegacyPhotos/LatinLegacyLiveMay02.png"
           alt="Latin Legacy Live"
           fill
-          className="object-cover object-top"
+          className="object-contain"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
 
