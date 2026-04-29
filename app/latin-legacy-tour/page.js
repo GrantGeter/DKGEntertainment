@@ -104,14 +104,27 @@ function VideoCarousel({ clips }) {
   const touchStartX = useRef(null)
   const videoRefs = useRef([])
 
-  // Autoplay the active video whenever the slide changes (including on first mount).
-  // We set .muted imperatively because React's `muted` JSX prop doesn't reliably
-  // reflect to the DOM property in all versions — this is the safe workaround.
   useEffect(() => {
     const vid = videoRefs.current[current]
     if (!vid) return
+
+    // Pause and reset all other videos
+    videoRefs.current.forEach((v, i) => {
+      if (v && i !== current) { v.pause(); v.currentTime = 0 }
+    })
+
     vid.muted = true
-    vid.play().catch(() => {}) // silently ignore autoplay-policy rejections
+
+    const tryPlay = () => vid.play().catch(() => {})
+
+    if (vid.readyState >= 3) {
+      // HAVE_FUTURE_DATA — enough buffered to play
+      tryPlay()
+    } else {
+      vid.addEventListener('canplay', tryPlay, { once: true })
+    }
+
+    return () => vid.removeEventListener('canplay', tryPlay)
   }, [current])
 
   function pauseCurrent() {
@@ -160,18 +173,24 @@ function VideoCarousel({ clips }) {
             transition: 'transform 0.32s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          {clips.map((src, i) => (
-            <div key={src} className="w-full flex-shrink-0 px-6">
-              <video
-                ref={el => { videoRefs.current[i] = el }}
-                src={src}
-                controls
-                muted
-                playsInline
-                className="w-full aspect-video bg-black"
-              />
-            </div>
-          ))}
+          {clips.map((src, i) => {
+            const isActive = i === current
+            const isNext   = i === (current + 1) % clips.length
+            return (
+              <div key={src} className="w-full flex-shrink-0 px-6">
+                <video
+                  ref={el => { videoRefs.current[i] = el }}
+                  src={isActive || isNext ? src : undefined}
+                  controls
+                  muted
+                  autoPlay={isActive}
+                  playsInline
+                  preload={isActive ? 'auto' : isNext ? 'metadata' : 'none'}
+                  className="w-full aspect-video bg-black"
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
 
