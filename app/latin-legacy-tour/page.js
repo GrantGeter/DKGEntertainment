@@ -397,7 +397,7 @@ export default function LatinLegacyTourPage() {
             className="mb-4"
           >
             <video
-              src="/LatinLegacyPhotos/clips/clip_02_15m16s.mp4"
+              src="/api/videos/clip_02_15m16s.mp4"
               controls
               playsInline
               className="w-full aspect-video bg-black object-contain"
@@ -407,12 +407,12 @@ export default function LatinLegacyTourPage() {
           {/* Clip grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              '/LatinLegacyPhotos/clips/clip_03_25m54s.mp4',
-              '/LatinLegacyPhotos/clips/clip_04_40m46s.mp4',
-              '/LatinLegacyPhotos/clips/clip_05_46m12s.mp4',
-              '/LatinLegacyPhotos/clips/clip_06_56m16s.mp4',
-              '/LatinLegacyPhotos/clips/clip_07_62m18s.mp4',
-              '/LatinLegacyPhotos/clips/clip_08_67m36s.mp4',
+              '/api/videos/clip_03_25m54s.mp4',
+              '/api/videos/clip_04_40m46s.mp4',
+              '/api/videos/clip_05_46m12s.mp4',
+              '/api/videos/clip_06_56m16s.mp4',
+              '/api/videos/clip_07_62m18s.mp4',
+              '/api/videos/clip_08_67m36s.mp4',
             ].map((src, i) => (
               <motion.div
                 key={src}
