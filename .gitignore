@@ -13,6 +13,9 @@
 # production
 /build
 
+# Cloudflare build output
+/.open-next/
+
 # misc
 .DS_Store
 *.pem
@@ -26,7 +29,7 @@ yarn-error.log*
 .env*.local
 .env
 
-# database & uploads (persisted via Railway volume in production)
+# database & local state (Railway / SQLite legacy — now using Cloudflare D1)
 data/dkg.db
 data/dkg.db-shm
 data/dkg.db-wal
@@ -43,10 +46,3 @@ next-env.d.ts
 # Cloudflare
 .wrangler/
 .dev.vars
-
-# Old Railway artifacts
-data/dkg.db
-data/dkg.db-shm
-data/dkg.db-wal
-data/uploads/
-public/uploads/
