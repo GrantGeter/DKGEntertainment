@@ -65,8 +65,20 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/20 text-xs">© {new Date().getFullYear()} DKG Entertainment. All rights reserved.</p>
-          <p className="text-white/10 text-xs tracking-widest uppercase">Culture in Motion</p>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <p className="text-white/20 text-xs">© {new Date().getFullYear()} DKG Entertainment. All rights reserved.</p>
+            <span className="hidden sm:block text-white/10 text-xs">·</span>
+            <p className="text-white/15 text-xs">Houston, TX</p>
+          </div>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="text-white/20 hover:text-white/50 transition-colors text-xs tracking-widest uppercase">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-white/20 hover:text-white/50 transition-colors text-xs tracking-widest uppercase">
+              Terms
+            </Link>
+            <p className="text-white/10 text-xs tracking-widest uppercase hidden md:block">Culture in Motion</p>
+          </div>
         </div>
       </div>
     </footer>
